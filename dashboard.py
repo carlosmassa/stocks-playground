@@ -308,7 +308,7 @@ fig.update_layout(
     hovermode="x",
     yaxis=dict(
             hoverformat=",.2f",
-            yaxis_type="log",
+            type="log",
             title=dict(text="Price (USD)", font=dict(color="black", size=14)),
             tickformat=",.2f",
             tickprefix="$",
@@ -320,7 +320,7 @@ fig.update_layout(
     xaxis=dict(
         hoverformat="%Y-%m-%d",
         showgrid=True,
-        #type="date",
+        type="date",
         title=dict(text="Date", font=dict(color="black", size=13)),
         nticks=20,
         tickfont=dict(color="#000000", size=13),
