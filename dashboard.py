@@ -150,4 +150,25 @@ resp = requests.get(url=globalURL)
 data = resp.json()
 st.write(data["Response"])
 
-st.write("## Ticker behavior")
+# Parse the JSON into a Pandas DataFrame
+try:
+    df = pd.DataFrame.from_dict(data['Data'])
+    df = df.rename(columns={'time': 'date'})
+    df['date'] = pd.to_datetime(df['date'], unit='s')
+    df.set_index('date', inplace=True)
+    df_save = df[['close', 'open', 'high', 'low']]
+except Exception as e:
+    self.errors.append(e)
+    df_save = None
+
+# Include percentage change and other columns
+df = df_save
+df['change'] = df['close'].pct_change()
+
+# Show Log chart of data
+
+fig = px.line(df, x="Date", y=["close"]).update_layout(
+    yaxis_title='Historical Chart ('+ticker.upper()+') - Log Y axis'
+)
+st.plotly_chart(fig, use_container_width=True)
+
