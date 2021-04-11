@@ -9,6 +9,7 @@ from dateutil.relativedelta import relativedelta
 from pandas_datareader import data as pdr
 import requests
 import urllib
+import numpy as np
 
 hide_streamlit_style = """
             <style>
@@ -206,7 +207,7 @@ except Exception as e:
 # Include percentage change and other columns
 df = df_save
 df['change'] = df['close'].pct_change()
-df['close_log'] = log(df['close'])
+df['close_log'] = np.log10(df['close'])
 
 st.write(df.head(5))
 
