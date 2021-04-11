@@ -308,7 +308,7 @@ fig.update_layout(
     hovermode="x",
     yaxis=dict(
             hoverformat=",.2f",
-            #log_y=True,
+            yaxis_type="log",
             title=dict(text="Price (USD)", font=dict(color="black", size=14)),
             tickformat=",.2f",
             tickprefix="$",
