@@ -8,6 +8,7 @@ import yfinance as yf
 from dateutil.relativedelta import relativedelta
 from pandas_datareader import data as pdr
 import requests
+import urllib
 
 yf.pdr_override()  # <== that's all it takes :-)
 
