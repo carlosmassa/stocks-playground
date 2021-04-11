@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import timedelta, date, datetime, timezone
 from typing import List
 import pandas as pd
 import plotly.express as px
@@ -9,6 +9,23 @@ from dateutil.relativedelta import relativedelta
 from pandas_datareader import data as pdr
 import requests
 import urllib
+
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            footer:after {
+	            content:'© 2021 Carlos Massa'; 
+	            visibility: visible;
+	            display: block;
+	            position: relative;
+	            #background-color: red;
+	            padding: 5px;
+	            top: 2px;
+            }
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 yf.pdr_override()  # <== that's all it takes :-)
 
@@ -131,6 +148,14 @@ st.plotly_chart(fig, use_container_width=True)
 ##############################
 # TEST
 ##############################
+
+today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+yesterday = datetime.strftime(datetime.now(timezone.utc) - timedelta(1), '%Y-%m-%d')
+tomorrow = datetime.strftime(datetime.now(timezone.utc) + timedelta(1), '%Y-%m-%d')
+one_month_from_now = datetime.strftime(datetime.now(timezone.utc) + timedelta(30), '%Y-%m-%d')
+one_year_from_now = datetime.strftime(datetime.now(timezone.utc) + timedelta(365), '%Y-%m-%d')
+four_years_from_now = datetime.strftime(datetime.now(timezone.utc) + timedelta(365 * 4), '%Y-%m-%d')
+
 # Load Bitcoin Prices into a dataframe
 # Ticker is customizable
 ticker = "BTC"
@@ -183,7 +208,7 @@ fig.add_trace(go.Scatter(
     y=df['close'],
     fill=None,
     fillcolor=None,
-    yaxis='y2',
+    yaxis='y',
     mode='lines',
     #line_color='rgba(0,0,128,1.0)', #Navy
     name='BTC Price'))
@@ -266,7 +291,7 @@ fig.update_layout(
     hovermode="x",
     yaxis=dict(
             hoverformat=",.2f",
-            type="log",
+            log_x=True,
             title=dict(text="Price (USD)", font=dict(color="black", size=14)),
             tickformat=",.2f",
             tickprefix="$",
@@ -295,3 +320,5 @@ fig.update_layout(
     )
 )
 st.plotly_chart(fig, use_container_width=True)
+
+
