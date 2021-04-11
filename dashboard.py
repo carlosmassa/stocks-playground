@@ -206,12 +206,13 @@ except Exception as e:
 # Include percentage change and other columns
 df = df_save
 df['change'] = df['close'].pct_change()
+df['close_log'] = log(df['close'])
 
 st.write(df.head(5))
 
 # Show Log chart of data
 
-fig = px.line(df, x="date", y=["close"]).update_layout(
+fig = px.line(df, x="date", y=["close_log"]).update_layout(
     yaxis_title='Historical Chart ('+ticker.upper()+') - Log Y axis'
 )
 st.plotly_chart(fig, use_container_width=True)
@@ -229,6 +230,7 @@ fig.add_trace(go.Scatter(
 
 fig.update_layout(template='plotly_white')
 fig.update_layout(title_text='BTC Price (USD)', title_x=0.5)
+
 
 fig.update_layout(
     shapes=[
@@ -305,7 +307,7 @@ fig.update_layout(
     hovermode="x",
     yaxis=dict(
             hoverformat=",.2f",
-            log_y=True,
+            #log_y=True,
             title=dict(text="Price (USD)", font=dict(color="black", size=14)),
             tickformat=",.2f",
             tickprefix="$",
@@ -317,7 +319,7 @@ fig.update_layout(
     xaxis=dict(
         hoverformat="%Y-%m-%d",
         showgrid=True,
-        type="date",
+        #type="date",
         title=dict(text="Date", font=dict(color="black", size=13)),
         nticks=20,
         tickfont=dict(color="#000000", size=13),
