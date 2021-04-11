@@ -593,5 +593,13 @@ fig.update_layout(
 		args2=["showlegend", true]  
 	)
     )
+    updatemenus=[dict(
+        type="buttons",
+        buttons=[dict(
+		label="≡",
+		method="relayout",
+		args=["showlegend", false],
+        	args2=["showlegend", true])]
+    )]
 )
 st.plotly_chart(fig, use_container_width=True)
