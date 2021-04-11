@@ -230,7 +230,7 @@ fig.add_trace(go.Scatter(
 	yaxis='y',
 	mode='lines',
 	#line_color='rgba(0,0,128,1.0)', #Navy
-	name='BTC Price (source: Cryptocompare)'))
+	name='BTC Price'))
 
 fig.update_layout(template='plotly_white')
 fig.update_layout(title_text='BTC Price (source: Cryptocompare)', title_x=0.5)
@@ -305,7 +305,7 @@ fig.update_layout(
             tickformat="$0,.2f",
             #tickprefix="$",
             tickmode="auto",
-	    nticks=10,
+	    nticks=8,
             tickfont=dict(color="#000000", size=14),
             gridcolor="#e4f2fc",
             #domain=[0.33, 1]
@@ -393,7 +393,7 @@ df.set_index('Id', inplace=True)
 
 df_save = df[['date', 'PriceUSD']]
 df = df_save
-st.write(df.head(5))
+
 
 # Calculate variables
 def RSI(series, period):
@@ -440,7 +440,7 @@ df2=df.iloc[::-1].copy()
 df2['LowestPriceForward'] = df2['PriceUSD'].expanding().min()
 df=df2.iloc[::-1].copy()
 
-st.write(df.head(5))
+
 
 fig = go.Figure()
 fig.add_trace(go.Scatter(
@@ -448,10 +448,45 @@ fig.add_trace(go.Scatter(
 	y=df['PriceUSD'],
 	fill=None,
 	fillcolor=None,
-	yaxis='y',
 	mode='lines',
 	#line_color='rgba(0,0,128,1.0)', #Navy
-	name='BTC Price (source: Coinmetrics)'))
+	name='BTC Price'))
+
+fig.add_trace(go.Scatter(
+	x=df['date'],
+	y=df['MinPriceUSD50days'],
+	fill=None,
+	fillcolor=None,
+	mode='lines',
+	#line_color='rgba(0,0,128,1.0)', #Navy
+	name='Highest Price for +50 consecutive days'))
+
+fig.add_trace(go.Scatter(
+	x=df['date'],
+	y=df['MinPriceUSD100days'],
+	fill=None,
+	fillcolor=None,
+	mode='lines',
+	#line_color='rgba(0,0,128,1.0)', #Navy
+	name='Highest Price for +100 consecutive days'))
+
+fig.add_trace(go.Scatter(
+	x=df['date'],
+	y=df['MinPriceUSD200days'],
+	fill=None,
+	fillcolor=None,
+	mode='lines',
+	#line_color='rgba(0,0,128,1.0)', #Navy
+	name='Highest Price for +200 consecutive days'))
+
+fig.add_trace(go.Scatter(
+	x=df['date'],
+	y=df['MinPriceUSD365ays'],
+	fill=None,
+	fillcolor=None,
+	mode='lines',
+	#line_color='rgba(0,0,128,1.0)', #Navy
+	name='Highest Price for +365 consecutive days'))
 
 fig.update_layout(template='plotly_white')
 fig.update_layout(title_text='BTC Price (source: Coinmetrics)', title_x=0.5)
@@ -526,7 +561,7 @@ fig.update_layout(
             tickformat="$0,.2f",
             #tickprefix="$",
             tickmode="auto",
-	    nticks=10,
+	    nticks=6,
             tickfont=dict(color="#000000", size=14),
             gridcolor="#e4f2fc",
             #domain=[0.33, 1]
