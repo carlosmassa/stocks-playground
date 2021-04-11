@@ -302,8 +302,8 @@ fig.update_layout(
             title=dict(text="Price (USD)", font=dict(color="black", size=14)),
             tickformat="0,.2f",
             tickprefix="$",
-            #tickmode="auto",
-	    nticks=10,
+            tickmode="auto",
+	    nticks=5,
             tickfont=dict(color="#000000", size=14),
             gridcolor="#e4f2fc",
             #domain=[0.33, 1]
