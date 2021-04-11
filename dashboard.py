@@ -584,15 +584,6 @@ fig.update_layout(
         t=35,
         pad=4
     ),
-    updatemenus=dict(
-        type="buttons",
-        buttons=dict(
-		label="≡",
-		method="relayout",
-		args=["showlegend", false],
-		args2=["showlegend", true]  
-	)
-    )
     updatemenus=[dict(
         type="buttons",
         buttons=[dict(
