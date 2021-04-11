@@ -204,14 +204,15 @@ st.plotly_chart(fig, use_container_width=True)
 
 fig = go.Figure()
 fig.add_trace(go.Scatter(
-    x=df['date'],
-    y=df['close'],
-    fill=None,
-    fillcolor=None,
-    yaxis='y',
-    mode='lines',
-    #line_color='rgba(0,0,128,1.0)', #Navy
-    name='BTC Price'))
+	x=df['date'],
+	y=df['close'],
+	fill=None,
+	fillcolor=None,
+	yaxis='y',
+	log_y=True,
+	mode='lines',
+	#line_color='rgba(0,0,128,1.0)', #Navy
+	name='BTC Price'))
 
 fig.update_layout(template='plotly_white')
 fig.update_layout(title_text='BTC Price (USD)', title_x=0.5)
@@ -221,7 +222,7 @@ fig.update_layout(
         dict(                                      # Color palette: https://www.color-hex.com/color-palette/44237
             fillcolor="rgba(107,127,140, 0.2)",
             line={"width": 0},
-            type="rect",
+            #type="rect",
             x0="2009-01-03",
             x1="2012-11-28",
             xref="x",
@@ -232,7 +233,7 @@ fig.update_layout(
         dict(
             fillcolor="rgba(142,154,162, 0.2)",
             line={"width": 0},
-            type="rect",
+            #type="rect",
             x0="2012-11-28",
             x1="2016-07-09",
             xref="x",
@@ -243,7 +244,7 @@ fig.update_layout(
         dict(
             fillcolor="rgba(189,195,199, 0.2)",
             line={"width": 0},
-            type="rect",
+            #type="rect",
             x0="2016-07-09",
             x1="2020-05-12",
             xref="x",
@@ -254,7 +255,7 @@ fig.update_layout(
         dict(
             fillcolor="rgba(233,234,235, 0.2)",
             line={"width": 0},
-            type="rect",
+            #type="rect",
             x0="2020-05-12",
             x1="2024-05-12",
             xref="x",
@@ -265,7 +266,7 @@ fig.update_layout(
         dict(
             fillcolor="rgba(186, 10, 15, 0.2)",
             line={"width": 0},
-            type="rect",
+            #type="rect",
             x0=0,
             x1=1,
             xref="paper",
@@ -291,7 +292,7 @@ fig.update_layout(
     hovermode="x",
     yaxis=dict(
             hoverformat=",.2f",
-            log_x=True,
+            log_y=True,
             title=dict(text="Price (USD)", font=dict(color="black", size=14)),
             tickformat=",.2f",
             tickprefix="$",
