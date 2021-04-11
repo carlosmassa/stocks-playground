@@ -590,7 +590,7 @@ fig.update_layout(
 		label="≡",
 		method="relayout",
 		args=[{"showlegend": [False]}],
-        	args=[{"showlegend": [True]}]
+        	args2=[{"showlegend": [True]}]
 	)]
     )]
 )
