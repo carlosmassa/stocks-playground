@@ -396,6 +396,23 @@ df = df_save
 st.write(df.head(5))
 
 # Calculate variables
+def RSI(series, period):
+    # Get the difference in price from previous step
+    delta = series.diff()
+    # Get rid of the first row, which is NaN since it did not have a previous
+    # row to calculate the differences
+    delta = delta[1:]
+    # Make the positive gains (up) and negative gains (down) Series
+    up, down = delta.copy(), delta.copy()
+    up[up < 0] = 0
+    down[down > 0] = 0
+    # Calculate the EWMA
+    roll_up1 = up.ewm(span=period).mean()
+    roll_down1 = down.abs().ewm(span=period).mean()
+    # Calculate the RSI based on EWMA
+    RS = roll_up1 / roll_down1
+    return 100.0 - (100.0 / (1.0 + RS))
+
 df['MA_10'] = df['PriceUSD'].rolling(window=10).mean()  # calculate MA10
 df['MA_20'] = df['PriceUSD'].rolling(window=20).mean()  # calculate MA20
 df['MA_50'] = df['PriceUSD'].rolling(window=50).mean()  # calculate MA50
