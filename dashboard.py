@@ -300,10 +300,10 @@ fig.update_layout(
             hoverformat=",.2f",
             type="log",
             title=dict(text="Price (USD)", font=dict(color="black", size=14)),
-            tickformat="0,.2f",
-            tickprefix="$",
+            tickformat="$0,.2f",
+            #tickprefix="$",
             tickmode="auto",
-	    nticks=5,
+	    nticks=10,
             tickfont=dict(color="#000000", size=14),
             gridcolor="#e4f2fc",
             #domain=[0.33, 1]
