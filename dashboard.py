@@ -168,14 +168,14 @@ df['change'] = df['close'].pct_change()
 
 # Show Log chart of data
 
-fig = px.line(df, x="Date", y=["close"]).update_layout(
+fig = px.line(df, x="date", y=["close"]).update_layout(
     yaxis_title='Historical Chart ('+ticker.upper()+') - Log Y axis'
 )
 st.plotly_chart(fig, use_container_width=True)
 
 fig = go.Figure()
 fig.add_trace(go.Scatter(
-    x=df['Date'],
+    x=df['date'],
     y=df['close'],
     fill=None,
     fillcolor=None,
