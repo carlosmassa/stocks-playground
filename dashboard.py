@@ -543,7 +543,7 @@ fig.update_layout(
     showlegend=True,
     legend=dict(
     	orientation="h",
-    	yanchor="top",
+    	yanchor="bottom",
     	y=1.02,
     	xanchor="right",
     	x=1
