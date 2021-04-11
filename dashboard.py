@@ -243,7 +243,7 @@ fig.update_layout(
             x0="2009-01-03",
             x1="2012-11-28",
             xref="x",
-            y0=0,
+            y0=min(trace.y),
             y1=1,
             yref="paper"
         ),
