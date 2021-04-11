@@ -213,8 +213,8 @@ st.write(df.head(5))
 
 # Show Log chart of data
 
-fig = px.line(df, x="date", y=["close_log"]).update_layout(
-    yaxis_title='Historical Chart ('+ticker.upper()+') - Log Y axis'
+fig = px.line(df, x="date", y=["close"]).update_layout(
+    yaxis_title='Historical Chart ('+ticker.upper()+') - Log Y axis', log_y=True
 )
 st.plotly_chart(fig, use_container_width=True)
 
@@ -226,6 +226,7 @@ fig.add_trace(go.Scatter(
 	fillcolor=None,
 	yaxis='y',
 	mode='lines',
+	yaxes=
 	#line_color='rgba(0,0,128,1.0)', #Navy
 	name='BTC Price'))
 
