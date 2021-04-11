@@ -27,6 +27,20 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
+def _max_width_():
+    max_width_str = f"max-width: 2000px;"
+    st.markdown(
+        f"""
+    <style>
+    .reportview-container .main .block-container{{
+        {max_width_str}
+    }}
+    </style>    
+    """,
+        unsafe_allow_html=True,
+    )
+
+_max_width_()
 yf.pdr_override()  # <== that's all it takes :-)
 
 """
@@ -209,7 +223,6 @@ fig.add_trace(go.Scatter(
 	fill=None,
 	fillcolor=None,
 	yaxis='y',
-	log_y=True,
 	mode='lines',
 	#line_color='rgba(0,0,128,1.0)', #Navy
 	name='BTC Price'))
