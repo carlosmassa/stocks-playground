@@ -239,46 +239,46 @@ fig.update_layout(
         dict(                                      # Color palette: https://www.color-hex.com/color-palette/44237
             fillcolor="rgba(107,127,140, 0.2)",
             line={"width": 0},
-            #type="rect",
+            type="rect",
             x0="2009-01-03",
             x1="2012-11-28",
             xref="x",
             y0=0,
             y1=1,
-            yref="y"
+            yref="paper"
         ),
         dict(
             fillcolor="rgba(142,154,162, 0.2)",
             line={"width": 0},
-            #type="rect",
+            type="rect",
             x0="2012-11-28",
             x1="2016-07-09",
             xref="x",
             y0=0,
             y1=1,
-            yref="y"
+            yref="paper"
         ),
         dict(
             fillcolor="rgba(189,195,199, 0.2)",
             line={"width": 0},
-            #type="rect",
+            type="rect",
             x0="2016-07-09",
             x1="2020-05-12",
             xref="x",
             y0=0,
             y1=1,
-            yref="y"
+            yref="paper"
         ),
         dict(
             fillcolor="rgba(233,234,235, 0.2)",
             line={"width": 0},
-            #type="rect",
+            type="rect",
             x0="2020-05-12",
             x1="2024-05-12",
             xref="x",
             y0=0,
             y1=1,
-            yref="y"
+            yref="paper"
         ),
     ],
     separators=".,",
