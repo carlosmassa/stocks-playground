@@ -42,7 +42,7 @@ def _max_width_():
         unsafe_allow_html=True,
     )
 
-_max_width_()
+#_max_width_()
 yf.pdr_override()  # <== that's all it takes :-)
 
 """
@@ -243,7 +243,7 @@ fig.update_layout(
             x0="2009-01-03",
             x1="2012-11-28",
             xref="x",
-            y0=0.0001,
+            y0=0,
             y1=1,
             yref="paper"
         ),
@@ -303,6 +303,7 @@ fig.update_layout(
             #tickformat=",.0d",
             tickprefix="$",
             tickmode="auto",
+	    nticks=10,
             tickfont=dict(color="#000000", size=14),
             gridcolor="#e4f2fc",
             #domain=[0.33, 1]
