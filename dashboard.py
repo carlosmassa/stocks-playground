@@ -187,7 +187,7 @@ field_dict = {'tsym': 'USD','allData': 'true'}
 url_args = "&" + urllib.parse.urlencode(field_dict)
 ticker = ticker.upper()
 globalURL = (base_url + "?" + ticker_field + "=" + ticker + url_args)
-st.write("Downloading price Data from:", globalURL)
+st.write("Capturing Data from:", globalURL)
 
 # Request the data
 resp = requests.get(url=globalURL)
@@ -335,7 +335,7 @@ st.plotly_chart(fig, use_container_width=True)
 # TEST - Coinmetrics
 ##############################
 
-st.write("Downloading data from Coinmetrics...")
+st.write("Capturing data from Coinmetrics...")
 cm = coinmetrics.Community()
 
 # Usage Examples ############################################################
@@ -366,7 +366,7 @@ asset_data = cm.get_asset_data_for_time_range(asset, metric, begin_timestamp, en
 # Convert the data object we received to a Pandas DataFrame for further processing.
 # We are reusing the `asset_data` from the previous step.
 df = coinmetrics.cm_to_pandas(asset_data)
-st.write(df.head(5))
+#st.write(df.head(5))
 
 
 # Add Date in proper format to dataframe df
@@ -391,8 +391,8 @@ df = df.drop_duplicates().copy()
 df['Id'] = df.reset_index().index
 df.set_index('Id', inplace=True)
 
-df_save = df[['date', 'PriceUSD']]
-df = df_save
+#df_save = df[['date', 'PriceUSD']]
+#df = df_save
 
 
 # Calculate variables
@@ -481,7 +481,7 @@ fig.add_trace(go.Scatter(
 
 fig.add_trace(go.Scatter(
 	x=df['date'],
-	y=df['MinPriceUSD365ays'],
+	y=df['MinPriceUSD365days'],
 	fill=None,
 	fillcolor=None,
 	mode='lines',
