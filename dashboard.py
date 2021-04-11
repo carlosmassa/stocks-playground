@@ -383,7 +383,7 @@ end_dt = yesterday_obj.date()
 for dt in date_range(start_dt, end_dt):
 	data.append(dt.strftime("%Y-%m-%d"))
 
-df.insert(0, 'Date', data, True)
+df.insert(0, 'date', data, True)
 
 # remove duplicate columns
 df = df.drop_duplicates().copy()
