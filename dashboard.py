@@ -11,6 +11,7 @@ from pandas_datareader import data as pdr
 import requests
 import urllib
 import numpy as np
+import coinmetrics
 
 hide_streamlit_style = """
             <style>
@@ -162,7 +163,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 
 ##############################
-# TEST
+# TEST - Cryptocompare
 ##############################
 
 today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
@@ -329,3 +330,43 @@ fig.update_layout(
 )
 st.plotly_chart(fig, use_container_width=True)
 
+##############################
+# TEST - Coinmetrics
+##############################
+
+st.write("Downloading data from Coinmetrics...")
+cm = coinmetrics.Community()
+
+# Usage Examples ############################################################
+
+# List the assets Coin Metrics has data for.
+# supported_assets = cm.get_supported_assets()
+# print("supported assets:\n", supported_assets)
+
+# List all available metrics for BTC.
+asset = "btc"
+available_data_types = cm.get_available_data_types_for_asset(asset)
+# print("available data types:\n", available_data_types)
+
+# Fetch All Metrics data for BTC from 2009-01-01 to 2019-12-17.
+asset = "btc"
+metric = "AdrActCnt,BlkCnt,BlkSizeByte,BlkSizeMeanByte,CapMVRVCur,CapMrktCurUSD,CapRealUSD,DiffMean,FeeMeanNtv," \
+         "FeeMeanUSD,FeeMedNtv,FeeMedUSD,FeeTotNtv,FeeTotUSD,IssContNtv,IssContPctAnn,IssContUSD,IssTotNtv,IssTotUSD," \
+         "NVTAdj,NVTAdj90,PriceBTC,PriceUSD,ROI1yr,ROI30d,SplyCur,TxCnt,TxTfrCnt,TxTfrValAdjNtv,TxTfrValAdjUSD," \
+         "TxTfrValMeanNtv,TxTfrValMeanUSD,TxTfrValMedNtv,TxTfrValMedUSD,TxTfrValNtv,TxTfrValUSD,VtyDayRet180d," \
+         "VtyDayRet30d,VtyDayRet60d"  # If only Price and Roi is needed, then use: metric = "PriceUSD,ROI30d"
+
+# metric = available_data_types
+# metric = "PriceUSD"
+
+asset_data = cm.get_asset_data_for_time_range(asset, metric, begin_timestamp, end_timestamp)
+# print("data given timerange:\n", asset_data)
+
+# Convert the data object we received to a Pandas DataFrame for further processing.
+# We are reusing the `asset_data` from the previous step.
+df = coinmetrics.cm_to_pandas(asset_data)
+df['date'] = pd.to_datetime(df['date'], unit='s')
+df['Id'] = df.reset_index().index
+df.set_index('Id', inplace=True)
+df_save = df[['date', 'PriceUSD']]
+st.write(df.head(5))
