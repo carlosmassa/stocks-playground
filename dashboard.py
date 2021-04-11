@@ -366,6 +366,7 @@ asset_data = cm.get_asset_data_for_time_range(asset, metric, begin_timestamp, en
 # Convert the data object we received to a Pandas DataFrame for further processing.
 # We are reusing the `asset_data` from the previous step.
 df = coinmetrics.cm_to_pandas(asset_data)
+st.write(df.head(5))
 df['date'] = pd.to_datetime(df['date'], unit='s')
 df['Id'] = df.reset_index().index
 df.set_index('Id', inplace=True)
