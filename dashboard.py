@@ -233,7 +233,7 @@ fig.add_trace(go.Scatter(
 	name='BTC Price (source: Cryptocompare)'))
 
 fig.update_layout(template='plotly_white')
-fig.update_layout(title_text='BTC Price (USD)', title_x=0.5)
+fig.update_layout(title_text='BTC Price (source: Cryptocompare)', title_x=0.5)
 
 
 fig.update_layout(
@@ -367,9 +367,30 @@ asset_data = cm.get_asset_data_for_time_range(asset, metric, begin_timestamp, en
 # We are reusing the `asset_data` from the previous step.
 df = coinmetrics.cm_to_pandas(asset_data)
 st.write(df.head(5))
+
+
+# Add Date in proper format to dataframe df
+data = []
+
+def date_range(date1, date2):
+	for n in range(int((date2 - date1).days) + 1):
+            yield date1 + timedelta(n)
+
+start_dt = date(2009, 1, 3)
+yesterday_obj = datetime.strptime(yesterday, '%Y-%m-%d')
+end_dt = yesterday_obj.date()
+
+for dt in date_range(start_dt, end_dt):
+	data.append(dt.strftime("%Y-%m-%d"))
+
+df.insert(0, 'Date', data, True)
+
+# remove duplicate columns
+df = df.drop_duplicates().copy()
+
 df['Id'] = df.reset_index().index
 df.set_index('Id', inplace=True)
-df['date'] = pd.to_datetime(df['date'], unit='s')
+
 df_save = df[['date', 'PriceUSD']]
 df = df_save
 st.write(df.head(5))
@@ -416,7 +437,7 @@ fig.add_trace(go.Scatter(
 	name='BTC Price (source: Coinmetrics)'))
 
 fig.update_layout(template='plotly_white')
-fig.update_layout(title_text='BTC Price (USD)', title_x=0.5)
+fig.update_layout(title_text='BTC Price (source: Coinmetrics)', title_x=0.5)
 
 
 fig.update_layout(
