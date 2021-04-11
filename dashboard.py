@@ -226,7 +226,7 @@ fig.add_trace(go.Scatter(
 	fillcolor=None,
 	yaxis='y',
 	mode='lines',
-	yaxes=
+	yaxes='log',
 	#line_color='rgba(0,0,128,1.0)', #Navy
 	name='BTC Price'))
 
