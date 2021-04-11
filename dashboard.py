@@ -329,13 +329,6 @@ fig.update_layout(
         range=['2009-12-20', one_year_from_now],
         zeroline=True,
     ),
-    margin=dict(
-        l=120,
-        r=60,
-        b=35,
-        t=35,
-        pad=4
-    )
 )
 st.plotly_chart(fig, use_container_width=True)
 
