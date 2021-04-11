@@ -540,13 +540,17 @@ fig.update_layout(
         ),
     ],
     separators=".,",
-    showlegend=True,
+    showlegend=False,
     legend=dict(
-    	orientation="h",
-    	yanchor="bottom",
-    	y=1.02,
-    	xanchor="right",
-    	x=1
+        x=0.98,
+        y=0.10,
+        bgcolor='#ffffff',
+        bordercolor='#000000',
+        borderwidth=1,
+        font=dict(color="black", size=13),
+        traceorder='normal',
+        xanchor='auto',
+        yanchor='auto'
     ),
     hoverlabel=dict(namelength=-1),
     hovermode="x",
