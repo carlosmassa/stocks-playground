@@ -296,12 +296,11 @@ fig.update_layout(
     ),
     hoverlabel=dict(namelength=-1),
     hovermode="x",
-    height=1000,
     yaxis=dict(
             hoverformat=",.2f",
             type="log",
             title=dict(text="Price (USD)", font=dict(color="black", size=14)),
-            tickformat=",.2f",
+            tickformat=",",
             tickprefix="$",
             nticks=10,
             tickfont=dict(color="#000000", size=14),
