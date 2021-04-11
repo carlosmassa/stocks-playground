@@ -7,6 +7,7 @@ import streamlit as st
 import yfinance as yf
 from dateutil.relativedelta import relativedelta
 from pandas_datareader import data as pdr
+import requests
 
 yf.pdr_override()  # <== that's all it takes :-)
 
@@ -124,3 +125,29 @@ fig = px.line(df, x="Date", y=["Averaged", "Raw"]).update_layout(
     yaxis_title=f"'{value_type}' value"
 )
 st.plotly_chart(fig, use_container_width=True)
+
+
+##############################
+# TEST
+##############################
+# Load Bitcoin Prices into a dataframe
+# Ticker is customizable
+ticker = "BTC"
+# Cryptocompare URL and fiels
+# Cryptocompare API KEY: 979ade059ddaa46d916f9b80f8a07d3448f53bad60a073a08d573580a7bffde6
+# API Key not needed here!
+base_url = 'https://min-api.cryptocompare.com/data/histoday'
+ticker_field = 'fsym'
+field_dict = {'tsym': 'USD','allData': 'true'}
+# Convert the field dict into a url encoded string
+url_args = "&" + urllib.parse.urlencode(field_dict)
+ticker = ticker.upper()
+globalURL = (base_url + "?" + ticker_field + "=" + ticker + url_args)
+st.write("Downloading price Data from:", globalURL)
+
+# Request the data
+resp = requests.get(url=globalURL)
+data = resp.json()
+st.write(data["Response"])
+
+st.write("## Ticker behavior")
