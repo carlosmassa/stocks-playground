@@ -540,7 +540,7 @@ fig.update_layout(
         ),
     ],
     separators=".,",
-    #showlegend=False,
+    showlegend=False,
     legend=dict(
         x=0.98,
         y=0.10,
