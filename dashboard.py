@@ -161,17 +161,18 @@ fig = px.line(df, x="Date", y=["Averaged", "Raw"]).update_layout(
 )
 st.plotly_chart(fig, use_container_width=True)
 
-
-##############################
-# TEST - Cryptocompare
-##############################
-
 today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 yesterday = datetime.strftime(datetime.now(timezone.utc) - timedelta(1), '%Y-%m-%d')
 tomorrow = datetime.strftime(datetime.now(timezone.utc) + timedelta(1), '%Y-%m-%d')
 one_month_from_now = datetime.strftime(datetime.now(timezone.utc) + timedelta(30), '%Y-%m-%d')
 one_year_from_now = datetime.strftime(datetime.now(timezone.utc) + timedelta(365), '%Y-%m-%d')
 four_years_from_now = datetime.strftime(datetime.now(timezone.utc) + timedelta(365 * 4), '%Y-%m-%d')
+begin_timestamp = "2009-01-03"  # The `datetime` type is also accepted
+end_timestamp = yesterday  # The `datetime` type is also accepted
+
+##############################
+# TEST - Cryptocompare
+##############################
 
 # Load Bitcoin Prices into a dataframe
 # Ticker is customizable
@@ -229,7 +230,7 @@ fig.add_trace(go.Scatter(
 	yaxis='y',
 	mode='lines',
 	#line_color='rgba(0,0,128,1.0)', #Navy
-	name='BTC Price'))
+	name='BTC Price (source: Cryptocompare)'))
 
 fig.update_layout(template='plotly_white')
 fig.update_layout(title_text='BTC Price (USD)', title_x=0.5)
@@ -370,3 +371,143 @@ df['Id'] = df.reset_index().index
 df.set_index('Id', inplace=True)
 df_save = df[['date', 'PriceUSD']]
 st.write(df.head(5))
+
+# Calculate variables
+df['MA_10'] = df['PriceUSD'].rolling(window=10).mean()  # calculate MA10
+df['MA_20'] = df['PriceUSD'].rolling(window=20).mean()  # calculate MA20
+df['MA_50'] = df['PriceUSD'].rolling(window=50).mean()  # calculate MA50
+df['MA_100'] = df['PriceUSD'].rolling(window=100).mean()  # calculate MA100
+df['MA_140'] = df['PriceUSD'].rolling(window=140).mean()  # calculate MA100
+df['MA_200'] = df['PriceUSD'].rolling(window=200).mean()  # calculate MA200
+df['MA_730'] = df['PriceUSD'].rolling(window=730).mean()  # calculate MA730
+df['MA_730x5'] = df['MA_730'] * 5  # calculate 5xMA730
+df['MA_1458'] = df['PriceUSD'].rolling(window=1458).mean()  # calculate MA1458
+df['MA_1458_diff'] = df['MA_1458'].diff()  # calculate 200WMA strength
+df['MA_1458_growth'] = df['MA_1458'].pct_change().mul(100).round(3)  # calculate 200WMA %growth
+df['MA_1458_const'] = df['PriceUSD'] / df['MA_1458_diff']
+df['RSI_5'] = RSI(df['PriceUSD'], 5)  # calculate RSI_5
+df['RSI_14'] = RSI(df['PriceUSD'], 14) # calculate RSI_14
+df['MinPriceUSD50days'] = df['PriceUSD'].rolling(window=50).min()
+df['MinPriceUSD100days'] = df['PriceUSD'].rolling(window=100).min()
+df['MinPriceUSD200days'] = df['PriceUSD'].rolling(window=200).min()
+df['MinPriceUSD365days'] = df['PriceUSD'].rolling(window=365).min()
+
+# Calculation of lowest price forward
+# reverse df
+# expanding().min() to calculate min value of all previous values (which are the future ones because df is reversed)
+# reverse df again
+df2=df.iloc[::-1].copy()
+df2['LowestPriceForward'] = df2['PriceUSD'].expanding().min()
+df=df2.iloc[::-1].copy()
+
+st.write(df.head(5))
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(
+	x=df['date'],
+	y=df['PriceUSD'],
+	fill=None,
+	fillcolor=None,
+	yaxis='y',
+	mode='lines',
+	#line_color='rgba(0,0,128,1.0)', #Navy
+	name='BTC Price (source: Coinmetrics)'))
+
+fig.update_layout(template='plotly_white')
+fig.update_layout(title_text='BTC Price (USD)', title_x=0.5)
+
+
+fig.update_layout(
+    shapes=[
+        dict(                                      # Color palette: https://www.color-hex.com/color-palette/44237
+            fillcolor="rgba(107,127,140, 0.2)",
+            line={"width": 0},
+            type="rect",
+            x0="2009-01-03",
+            x1="2012-11-28",
+            xref="x",
+            y0=0,
+            y1=1,
+            yref="paper"
+        ),
+        dict(
+            fillcolor="rgba(142,154,162, 0.2)",
+            line={"width": 0},
+            type="rect",
+            x0="2012-11-28",
+            x1="2016-07-09",
+            xref="x",
+            y0=0,
+            y1=1,
+            yref="paper"
+        ),
+        dict(
+            fillcolor="rgba(189,195,199, 0.2)",
+            line={"width": 0},
+            type="rect",
+            x0="2016-07-09",
+            x1="2020-05-12",
+            xref="x",
+            y0=0,
+            y1=1,
+            yref="paper"
+        ),
+        dict(
+            fillcolor="rgba(233,234,235, 0.2)",
+            line={"width": 0},
+            type="rect",
+            x0="2020-05-12",
+            x1="2024-05-12",
+            xref="x",
+            y0=0,
+            y1=1,
+            yref="paper"
+        ),
+    ],
+    separators=".,",
+    showlegend=True,
+    legend=dict(
+        x=0.98,
+        y=0.10,
+        bgcolor='#ffffff',
+        bordercolor='#000000',
+        borderwidth=1,
+        font=dict(color="black", size=13),
+        traceorder='normal',
+        xanchor='auto',
+        yanchor='auto'
+    ),
+    hoverlabel=dict(namelength=-1),
+    hovermode="x",
+    yaxis=dict(
+            hoverformat=",.2f",
+            type="log",
+            title=dict(text="Price (USD)", font=dict(color="black", size=14)),
+            tickformat="$0,.2f",
+            #tickprefix="$",
+            tickmode="auto",
+	    nticks=10,
+            tickfont=dict(color="#000000", size=14),
+            gridcolor="#e4f2fc",
+            #domain=[0.33, 1]
+        ),
+    xaxis=dict(
+        hoverformat="%Y-%m-%d",
+        showgrid=True,
+        type="date",
+        title=dict(text="Date", font=dict(color="black", size=13)),
+        tickmode="auto",
+        tickfont=dict(color="#000000", size=13),
+        gridcolor="#e4f2fc",
+        range=['2009-12-20', one_year_from_now],
+        zeroline=True,
+    ),
+    margin=dict(
+        l=120,
+        r=60,
+        b=35,
+        t=35,
+        pad=4
+    )
+)
+st.plotly_chart(fig, use_container_width=True)
