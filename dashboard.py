@@ -166,6 +166,8 @@ except Exception as e:
 df = df_save
 df['change'] = df['close'].pct_change()
 
+st.write(df.head(5))
+
 # Show Log chart of data
 
 fig = px.line(df, x="date", y=["close"]).update_layout(
