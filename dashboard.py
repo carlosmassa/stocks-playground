@@ -589,8 +589,8 @@ fig.update_layout(
         buttons=dict(
 		label="≡",
 		method="relayout",
-		args=['showlegend', false],
-		args2=['showlegend', true]  
+		args=["showlegend", false],
+		args2=["showlegend", true]  
 	)
     )
 )
