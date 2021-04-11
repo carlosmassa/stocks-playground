@@ -173,3 +173,121 @@ fig = px.line(df, x="Date", y=["close"]).update_layout(
 )
 st.plotly_chart(fig, use_container_width=True)
 
+fig = go.Figure()
+fig.add_trace(go.Scatter(
+    x=df['Date'],
+    y=df['close'],
+    fill=None,
+    fillcolor=None,
+    yaxis='y2',
+    mode='lines',
+    #line_color='rgba(0,0,128,1.0)', #Navy
+    name='BTC Price'))
+
+fig.update_layout(template='plotly_white')
+fig.update_layout(title_text='BTC Price (USD)', title_x=0.5)
+
+fig.update_layout(
+    shapes=[
+        dict(                                      # Color palette: https://www.color-hex.com/color-palette/44237
+            fillcolor="rgba(107,127,140, 0.2)",
+            line={"width": 0},
+            type="rect",
+            x0="2009-01-03",
+            x1="2012-11-28",
+            xref="x",
+            y0=0,
+            y1=1,
+            yref="paper"
+        ),
+        dict(
+            fillcolor="rgba(142,154,162, 0.2)",
+            line={"width": 0},
+            type="rect",
+            x0="2012-11-28",
+            x1="2016-07-09",
+            xref="x",
+            y0=0,
+            y1=1,
+            yref="paper"
+        ),
+        dict(
+            fillcolor="rgba(189,195,199, 0.2)",
+            line={"width": 0},
+            type="rect",
+            x0="2016-07-09",
+            x1="2020-05-12",
+            xref="x",
+            y0=0,
+            y1=1,
+            yref="paper"
+        ),
+        dict(
+            fillcolor="rgba(233,234,235, 0.2)",
+            line={"width": 0},
+            type="rect",
+            x0="2020-05-12",
+            x1="2024-05-12",
+            xref="x",
+            y0=0,
+            y1=1,
+            yref="paper"
+        ),
+        dict(
+            fillcolor="rgba(186, 10, 15, 0.2)",
+            line={"width": 0},
+            type="rect",
+            x0=0,
+            x1=1,
+            xref="paper",
+            y0=30,
+            y1=70,
+            yref="y"
+        )
+    ],
+    separators=".,",
+    showlegend=True,
+    legend=dict(
+        x=0.98,
+        y=0.10,
+        bgcolor='#ffffff',
+        bordercolor='#000000',
+        borderwidth=1,
+        font=dict(color="black", size=13),
+        traceorder='normal',
+        xanchor='auto',
+        yanchor='auto'
+    ),
+    hoverlabel=dict(namelength=-1),
+    hovermode="x",
+    yaxis=dict(
+            hoverformat=",.2f",
+            type="log",
+            title=dict(text="Price (USD)", font=dict(color="black", size=14)),
+            tickformat=",.2f",
+            tickprefix="$",
+            nticks=10,
+            tickfont=dict(color="#000000", size=14),
+            gridcolor="#e4f2fc",
+            domain=[0.33, 1]
+        ),
+    xaxis=dict(
+        hoverformat="%Y-%m-%d",
+        showgrid=True,
+        type="date",
+        title=dict(text="Date", font=dict(color="black", size=13)),
+        nticks=20,
+        tickfont=dict(color="#000000", size=13),
+        gridcolor="#e4f2fc",
+        range=['2009-12-20', one_year_from_now],
+        zeroline=True,
+    ),
+    margin=dict(
+        l=120,
+        r=60,
+        b=35,
+        t=35,
+        pad=4
+    )
+)
+st.plotly_chart(fig, use_container_width=True)
