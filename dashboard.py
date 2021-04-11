@@ -326,6 +326,10 @@ fig.update_layout(
         pad=4
     )
 )
+fig.add_vrect(
+    x0="2009-01-03", x1="2012-11-28",
+    fillcolor="LightSalmon", opacity=0.5,
+    layer="below", line_width=0,
+)
 st.plotly_chart(fig, use_container_width=True)
-
 
