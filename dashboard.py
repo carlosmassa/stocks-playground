@@ -245,7 +245,7 @@ fig.update_layout(
             xref="x",
             y0=0,
             y1=1,
-            yref="paper"
+            yref="y"
         ),
         dict(
             fillcolor="rgba(142,154,162, 0.2)",
@@ -256,7 +256,7 @@ fig.update_layout(
             xref="x",
             y0=0,
             y1=1,
-            yref="paper"
+            yref="y"
         ),
         dict(
             fillcolor="rgba(189,195,199, 0.2)",
@@ -267,7 +267,7 @@ fig.update_layout(
             xref="x",
             y0=0,
             y1=1,
-            yref="paper"
+            yref="y"
         ),
         dict(
             fillcolor="rgba(233,234,235, 0.2)",
@@ -278,19 +278,8 @@ fig.update_layout(
             xref="x",
             y0=0,
             y1=1,
-            yref="paper"
-        ),
-        dict(
-            fillcolor="rgba(186, 10, 15, 0.2)",
-            line={"width": 0},
-            #type="rect",
-            x0=0,
-            x1=1,
-            xref="paper",
-            y0=30,
-            y1=70,
             yref="y"
-        )
+        ),
     ],
     separators=".,",
     showlegend=True,
