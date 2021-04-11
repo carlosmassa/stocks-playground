@@ -112,7 +112,7 @@ fig = go.Figure(
         )
     ]
 )
-st.plotly_chart(fig)
+st.plotly_chart(fig, use_container_width=True)
 
 value_type = st.selectbox("Select value", ["Open", "High", "Low", "Close"])
 df = pd.concat(
@@ -123,4 +123,4 @@ df.reset_index(inplace=True)
 fig = px.line(df, x="Date", y=["Averaged", "Raw"]).update_layout(
     yaxis_title=f"'{value_type}' value"
 )
-st.plotly_chart(fig)
+st.plotly_chart(fig, use_container_width=True)
