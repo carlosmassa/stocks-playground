@@ -156,8 +156,10 @@ try:
     df = pd.DataFrame.from_dict(data['Data'])
     df = df.rename(columns={'time': 'date'})
     df['date'] = pd.to_datetime(df['date'], unit='s')
-    df.set_index('date', inplace=True)
-    df_save = df[['close', 'open', 'high', 'low']]
+    #df.set_index('date', inplace=True)
+    df['Id'] = df.reset_index().index
+    df.set_index('Id', inplace=True)
+    df_save = df[['date', 'close', 'open', 'high', 'low']]
 except Exception as e:
     self.errors.append(e)
     df_save = None
