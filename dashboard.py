@@ -435,7 +435,9 @@ df['MinPriceUSD200days'] = df['PriceUSD'].rolling(window=200).min()
 df['MinPriceUSD365days'] = df['PriceUSD'].rolling(window=365).min()
 df['MinPriceUSD2years'] = df['PriceUSD'].rolling(window=730).min()
 df['MinPriceUSD4years'] = df['PriceUSD'].rolling(window=1460).min()
-df['AllMinPriceEqual'] = np.where((df['MinPriceUSD50days'] == df['MinPriceUSD100days'] == df['MinPriceUSD200days']), df['date'], 0)
+df['AllMinPriceEqual'] = np.where(
+	((df['MinPriceUSD50days'] == df['MinPriceUSD100days']) and (df['MinPriceUSD50days'] == df['MinPriceUSD200days']) and (df['MinPriceUSD50days'] == df['MinPriceUSD365days'])),
+	df['date'], 0)
 
 # Calculation of lowest price forward
 # reverse df
@@ -540,9 +542,13 @@ for group in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%
 #st.write(converted_list)
 
 firstday_bottoms=[item[0] for item in converted_list]
+firstday_bottoms_copy=firstday_bottoms
 
 st.write("This is firstday_bottoms")
 st.write(firstday_bottoms)
+
+st.write("This is the last date on firstday_bottoms")
+st.write(firstday_bottoms_copy[0])
 
 # add lines using absolute references
 for k in range(len(firstday_bottoms)):
