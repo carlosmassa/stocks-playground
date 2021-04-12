@@ -564,32 +564,16 @@ st.write(test)
 st.write(type(test))
 
 
-# add lines using absolute references
 for k in range(len(lastday_bottoms_copy)):
-    #st.write(lines)
-    #st.write(type(lines))
-    #st.write(lastday_bottoms_copy[k])
-    #st.write(type(lastday_bottoms_copy[k]))
-    #date_object = datetime.strptime(lastday_bottoms_copy[k], '%Y-%m-%d').date()
-    #lastday_bottoms_copy[k] = date_object
-    #st.write(lastday_bottoms_copy[k])
-    #st.write(type(lastday_bottoms_copy[k]))
+    fig.add_trace(go.Scatter(
+	    x=[firstday_bottoms_copy[k], lastday_bottoms_copy[k]],
+	    y=[0, 60000],
+	    mode='rect',
+	    #line_color='rgba(0,0,128,1.0)', #Navy
+	    name='Bottom %2s' % k))
 
-    fig.add_shape(type='rect',
-                yref='y',
-                xref="x",
-                x0=firstday_bottoms_copy[k],
-                y0=0,
-                x1=lastday_bottoms_copy[k],
-                y1=1,
-                line=dict(color='black', width=3))
 
-    fig.add_annotation(
-                x=lastday_bottoms_copy[k],
-                y=1.06,
-                yref='paper',
-                showarrow=False,
-                text=k)
+
 
 fig.update_layout(template='plotly_white')
 fig.update_layout(title_text='BTC Price (source: Coinmetrics)', title_x=0.5)
