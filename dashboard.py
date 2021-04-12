@@ -431,6 +431,7 @@ df['MinPriceUSD50days'] = df['PriceUSD'].rolling(window=50).min()
 df['MinPriceUSD100days'] = df['PriceUSD'].rolling(window=100).min()
 df['MinPriceUSD200days'] = df['PriceUSD'].rolling(window=200).min()
 df['MinPriceUSD365days'] = df['PriceUSD'].rolling(window=365).min()
+df['MinPriceUSD2years'] = df['PriceUSD'].rolling(window=730).min()
 df['MinPriceUSD4years'] = df['PriceUSD'].rolling(window=1460).min()
 df['AllMinPriceEqual'] = np.where((df['MinPriceUSD50days'] == df['MinPriceUSD100days']), 1, 0)
 
@@ -492,12 +493,12 @@ fig.add_trace(go.Scatter(
 
 fig.add_trace(go.Scatter(
 	x=df['date'],
-	y=df['MinPriceUSD4years'],
+	y=df['MinPriceUSD2years'],
 	fill=None,
 	fillcolor=None,
 	mode='lines',
 	#line_color='rgba(0,0,128,1.0)', #Navy
-	name='Highest Price for +4 years'))
+	name='Highest Price for +2 years'))
 
 fig.add_trace(go.Scatter(
 	x=df['date'],
@@ -509,7 +510,7 @@ fig.add_trace(go.Scatter(
 	name='Lowest Price forward'))
 
 # lines to add, specified by x-position
-lines = {'a':"2018-09-24",'b':"20120-09-24"}
+lines = {'a':"2018-09-24",'b':"2020-09-24"}
 
 # add lines using absolute references
 for k in lines.keys():
@@ -524,7 +525,7 @@ for k in lines.keys():
                 line=dict(color='black', width=3))
     fig.add_annotation(
                 x=lines[k],
-                y=1.06,
+                y=0.95,
                 yref='paper',
                 showarrow=False,
                 text=k)
