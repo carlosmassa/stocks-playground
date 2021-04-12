@@ -539,6 +539,7 @@ for group in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%
 #st.write("This is the converted_list")
 #st.write(converted_list)
 
+
 firstday_bottoms=[item[0] for item in converted_list]
 firstday_bottoms_copy=firstday_bottoms
 
@@ -553,6 +554,11 @@ for k in range(len(firstday_bottoms)):
     st.write(k)
     st.write(firstday_bottoms[k])
     st.write(type(firstday_bottoms[k]))
+    date_object = datetime.strptime(firstday_bottoms[k], '%Y-%m-%d').date()
+    firstday_bottoms[k] = date_object
+    st.write(firstday_bottoms[k])
+    st.write(type(firstday_bottoms[k]))
+
     fig.add_shape(type='line',
                 yref="y",
                 xref="x",
