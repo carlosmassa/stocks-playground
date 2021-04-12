@@ -12,6 +12,7 @@ import requests
 import urllib
 import numpy as np
 import coinmetrics
+import more-itertools
 
 hide_streamlit_style = """
             <style>
@@ -515,6 +516,9 @@ lines = {'a':"2018-09-24",'b':"2020-09-24"}
 bottoms = df.loc[df['AllMinPriceEqual']!= 0,'date'].tolist()
 
 st.write(bottoms)
+
+for g in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%d').toordinal()):
+    st.write(list(bottoms))
 
 # add lines using absolute references
 for k in range(len(bottoms)):
