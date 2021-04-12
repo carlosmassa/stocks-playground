@@ -514,12 +514,6 @@ fig.add_trace(go.Scatter(
 # lines to add, specified by x-position
 lines = {'a':"2018-09-24",'b':"2020-09-24"}
 
-st.write("This is lines")
-for k in range(len(lines)):
-    test=lines[k]
-    st.write(test)
-    st.write(type(test))
-
 bottoms = df.loc[df['AllMinPriceEqual']!= 0,'date'].tolist()
 firstday_bottoms = []
 converted_list = []
@@ -568,12 +562,12 @@ st.write(lastday_bottoms_copy[0])
 for k in range(len(lastday_bottoms_copy)):
     #st.write(lines)
     #st.write(type(lines))
-    #st.write(firstday_bottoms[k])
-    #st.write(type(firstday_bottoms[k]))
-    #date_object = datetime.strptime(firstday_bottoms[k], '%Y-%m-%d').date()
-    #firstday_bottoms[k] = date_object
-    #st.write(firstday_bottoms[k])
-    #st.write(type(firstday_bottoms[k]))
+    st.write(lastday_bottoms_copy[k])
+    st.write(type(lastday_bottoms_copy[k]))
+    date_object = datetime.strptime(lastday_bottoms_copy[k], '%Y-%m-%d').date()
+    lastday_bottoms_copy[k] = date_object
+    st.write(lastday_bottoms_copy[k])
+    st.write(type(lastday_bottoms_copy[k]))
 
     fig.add_shape(type='line',
                 yref="y",
