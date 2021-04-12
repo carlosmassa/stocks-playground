@@ -435,7 +435,7 @@ df['MinPriceUSD200days'] = df['PriceUSD'].rolling(window=200).min()
 df['MinPriceUSD365days'] = df['PriceUSD'].rolling(window=365).min()
 df['MinPriceUSD2years'] = df['PriceUSD'].rolling(window=730).min()
 df['MinPriceUSD4years'] = df['PriceUSD'].rolling(window=1460).min()
-df['AllMinPriceEqual'] = np.where((df['MinPriceUSD50days'] == df['MinPriceUSD100days']), df['date'], 0)
+df['AllMinPriceEqual'] = np.where((df['MinPriceUSD50days'] == df['MinPriceUSD100days'] == df['MinPriceUSD200days']), df['date'], 0)
 
 # Calculation of lowest price forward
 # reverse df
@@ -546,7 +546,7 @@ st.write(firstday_bottoms)
 
 # add lines using absolute references
 for k in range(len(firstday_bottoms)):
-    #print(k)
+    st.write(k)
     fig.add_shape(type='line',
                 yref="y",
                 xref="x",
