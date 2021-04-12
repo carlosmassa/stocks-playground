@@ -563,6 +563,17 @@ test = df.iloc[0]['date']
 st.write(test)
 st.write(type(test))
 
+
+
+fig.add_trace(go.Scatter(
+	x=[lastday_bottoms_copy[0], lastday_bottoms_copy[0]],
+	y=[0, 10000],
+	mode='lines',
+	#line_color='rgba(0,0,128,1.0)', #Navy
+	name='Bottom'))
+
+
+
 # add lines using absolute references
 for k in range(len(lastday_bottoms_copy)):
     #st.write(lines)
