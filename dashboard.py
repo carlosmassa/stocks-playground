@@ -564,26 +564,6 @@ st.write(test)
 st.write(type(test))
 
 
-for k in range(len(lastday_bottoms_copy)):
-    #fig.add_trace(go.Scatter(
-	    #x=[lastday_bottoms_copy[k], lastday_bottoms_copy[k]],
-	    #y=[0, 60000],
-	    #mode='lines',
-	    #line_color='red',
-	    #name='Bottom %2s' % k))
-
-    fig.add_shape(type="rect",
-	    xref="x", yref="y",
-	    x0=firstday_bottoms_copy[k], y0=0,
-	    x1=lastday_bottoms_copy[k], y1=60000,
-	    line=dict(
-		color="RoyalBlue",
-		width=3,
-	    ),
-	    fillcolor="LightSkyBlue",
-    )
-
-
 # add lines using absolute references
 for k in range(len(lastday_bottoms_copy)):
     #st.write(lines)
@@ -595,10 +575,10 @@ for k in range(len(lastday_bottoms_copy)):
     #st.write(lastday_bottoms_copy[k])
     #st.write(type(lastday_bottoms_copy[k]))
 
-    fig.add_shape(type='line',
+    fig.add_shape(type='rect',
                 yref='y',
                 xref="x",
-                x0=lastday_bottoms_copy[k],
+                x0=firstday_bottoms_copy[k],
                 y0=0,
                 x1=lastday_bottoms_copy[k],
                 y1=1,
