@@ -12,7 +12,7 @@ import requests
 import urllib
 import numpy as np
 import coinmetrics
-import more-itertools
+import itertools
 
 hide_streamlit_style = """
             <style>
