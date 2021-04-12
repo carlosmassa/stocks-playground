@@ -575,12 +575,12 @@ for k in range(len(lastday_bottoms_copy)):
     #st.write(type(lastday_bottoms_copy[k]))
 
     fig.add_shape(type='line',
-                yref='paper',
-                #xref="x",
+                yref='y',
+                xref="x",
                 x0=lastday_bottoms_copy[k],
-                y0=df['PriceUSD'].min()*1.2,
+                y0=0,
                 x1=lastday_bottoms_copy[k],
-                y1=df['PriceUSD'].max()*1.2,
+                y1=1,
                 line=dict(color='black', width=3))
 
     fig.add_annotation(
