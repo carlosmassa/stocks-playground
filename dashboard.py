@@ -564,14 +564,21 @@ st.write(test)
 st.write(type(test))
 
 
-for k in range(len(lastday_bottoms_copy)):
+for k in range(len(firstday_bottoms_copy)):
     fig.add_trace(go.Scatter(
-	    x=[firstday_bottoms_copy[k], lastday_bottoms_copy[k]],
+	    x=[firstday_bottoms_copy[k], firstday_bottoms_copy[k]],
 	    y=[0, 60000],
-	    mode='rect',
-	    #line_color='rgba(0,0,128,1.0)', #Navy
-	    name='Bottom %2s' % k))
+	    mode='line',
+	    line_color='green', 
+	    name='Bottom %2s start' % k))
 
+for k in range(len(lastday_bottoms)):
+    fig.add_trace(go.Scatter(
+	    x=[lastday_bottoms[k], lastday_bottoms[k]],
+	    y=[0, 60000],
+	    mode='line',
+	    line_color='red', 
+	    name='Bottom %2s end' % k))
 
 
 
