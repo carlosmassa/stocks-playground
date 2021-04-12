@@ -568,7 +568,7 @@ for k in range(len(firstday_bottoms_copy)):
     fig.add_trace(go.Scatter(
 	    x=[firstday_bottoms_copy[k], firstday_bottoms_copy[k]],
 	    y=[0, 60000],
-	    mode='line',
+	    mode='lines',
 	    line_color='green', 
 	    name='Bottom %2s start' % k))
 
@@ -576,7 +576,7 @@ for k in range(len(lastday_bottoms)):
     fig.add_trace(go.Scatter(
 	    x=[lastday_bottoms[k], lastday_bottoms[k]],
 	    y=[0, 60000],
-	    mode='line',
+	    mode='lines',
 	    line_color='red', 
 	    name='Bottom %2s end' % k))
 
