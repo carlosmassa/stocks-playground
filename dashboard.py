@@ -514,8 +514,10 @@ lines = {'a':"2018-09-24",'b':"2020-09-24"}
 
 bottoms = df.loc[df['AllMinPriceEqual']!= 0,'date'].tolist()
 
+st.write(bottoms)
+
 # add lines using absolute references
-for k in bottoms:
+for k in range(len(bottoms)):
     #print(k)
     fig.add_shape(type='line',
                 yref="y",
