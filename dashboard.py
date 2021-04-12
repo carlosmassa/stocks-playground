@@ -560,7 +560,8 @@ st.write(lastday_bottoms_copy[0])
 
 st.write("This is the type of df[date]")
 test = df.iloc[0]['date']
-st.write(type(test)
+st.write(test)
+st.write(type(test))
 
 # add lines using absolute references
 for k in range(len(lastday_bottoms_copy)):
