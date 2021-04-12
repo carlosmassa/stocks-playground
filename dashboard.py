@@ -517,8 +517,10 @@ lines = {'a':"2018-09-24",'b':"2020-09-24"}
 bottoms = df.loc[df['AllMinPriceEqual']!= 0,'date'].tolist()
 firstday_bottoms = []
 
+st.write("This is bottoms")
 st.write(bottoms)
 
+st.write("This is all groups of consecutive_groups")
 def consecutive_groups(iterable, ordering=lambda x: x):
     for k, g in groupby(enumerate(iterable), key=lambda x: x[0] - ordering(x[1])):
         yield map(itemgetter(1), g)
@@ -526,7 +528,11 @@ def consecutive_groups(iterable, ordering=lambda x: x):
 for group in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%d').toordinal()):
     st.write(list(group))
 
+st.write("group type is:")
+st.write(type(group))
+	
 firstday_bottoms = [a_tuple[0] for a_tuple in group]
+st.write("This is firstday_bottoms")
 st.write(firstday_bottoms)
 
 # add lines using absolute references
