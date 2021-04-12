@@ -525,24 +525,24 @@ def consecutive_groups(iterable, ordering=lambda x: x):
 
 for group in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%d').toordinal()):
     st.write(list(group))
-    st.write(group[0])
-    firstday_bottoms.append(group[0])
+    st.write(group.index(0))
+    firstday_bottoms.append(group.index(0))
 
 st.write(firstday_bottoms)
 
 # add lines using absolute references
-for k in range(len(bottoms)):
+for k in range(len(firstday_bottoms)):
     #print(k)
     fig.add_shape(type='line',
                 yref="y",
                 xref="x",
-                x0=bottoms[k],
+                x0=firstday_bottoms[k],
                 y0=df['PriceUSD'].min()*1.2,
-                x1=bottoms[k],
+                x1=firstday_bottoms[k],
                 y1=df['PriceUSD'].max()*1.2,
                 line=dict(color='black', width=3))
     fig.add_annotation(
-                x=bottoms[k],
+                x=firstday_bottoms[k],
                 y=df['PriceUSD'].max()*1.25,
                 yref='paper',
                 showarrow=False,
