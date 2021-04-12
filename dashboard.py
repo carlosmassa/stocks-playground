@@ -12,7 +12,8 @@ import requests
 import urllib
 import numpy as np
 import coinmetrics
-from itertools import consecutive_groups
+from itertools import groupby
+from operator import itemgetter
 
 hide_streamlit_style = """
             <style>
@@ -517,8 +518,12 @@ bottoms = df.loc[df['AllMinPriceEqual']!= 0,'date'].tolist()
 
 st.write(bottoms)
 
+def consecutive_groups(iterable, ordering=lambda x: x):
+    for k, g in groupby(enumerate(iterable), key=lambda x: x[0] - ordering(x[1])):
+        yield map(itemgetter(1), g)
+
 for g in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%d').toordinal()):
-    st.write(list(bottoms))
+    print(list(bottoms))
 
 # add lines using absolute references
 for k in range(len(bottoms)):
