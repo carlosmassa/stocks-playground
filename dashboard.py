@@ -515,6 +515,7 @@ fig.add_trace(go.Scatter(
 lines = {'a':"2018-09-24",'b':"2020-09-24"}
 
 bottoms = df.loc[df['AllMinPriceEqual']!= 0,'date'].tolist()
+firstday_bottoms = []
 
 st.write(bottoms)
 
@@ -522,8 +523,12 @@ def consecutive_groups(iterable, ordering=lambda x: x):
     for k, g in groupby(enumerate(iterable), key=lambda x: x[0] - ordering(x[1])):
         yield map(itemgetter(1), g)
 
-for g in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%d').toordinal()):
-    st.write(list(bottoms))
+for group in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%d').toordinal()):
+    st.write(list(group))
+    st.write(list(group[0]))
+    firstday_bottoms.append(group[0])
+
+st.write(firstday_bottoms)
 
 # add lines using absolute references
 for k in range(len(bottoms)):
