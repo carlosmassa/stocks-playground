@@ -12,7 +12,7 @@ import requests
 import urllib
 import numpy as np
 import coinmetrics
-import itertools
+from itertools import consecutive_groups
 
 hide_streamlit_style = """
             <style>
