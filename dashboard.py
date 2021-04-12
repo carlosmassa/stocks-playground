@@ -526,7 +526,11 @@ def consecutive_groups(iterable, ordering=lambda x: x):
         yield map(itemgetter(1), g)
 
 for group in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%d').toordinal()):
-    st.write(list(group))
+    #st.write(list(group))
+    for k in group
+	firstday_bottoms.append(group[k])
+	st.write(group[k])
+	
 
 st.write("group type is:")
 st.write(type(group))
