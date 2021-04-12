@@ -488,6 +488,15 @@ fig.add_trace(go.Scatter(
 	#line_color='rgba(0,0,128,1.0)', #Navy
 	name='Highest Price for +365 consecutive days'))
 
+fig.add_trace(go.Scatter(
+	x=df['date'],
+	y=df['LowestPriceForward'],
+	fill=None,
+	fillcolor=None,
+	mode='lines',
+	#line_color='rgba(0,0,128,1.0)', #Navy
+	name='Lowest Price forward'))
+
 fig.update_layout(template='plotly_white')
 fig.update_layout(title_text='BTC Price (source: Coinmetrics)', title_x=0.5)
 
