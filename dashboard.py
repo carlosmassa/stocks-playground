@@ -521,7 +521,7 @@ converted_list = []
 st.write("This is bottoms")
 st.write(bottoms)
 
-st.write("This is all groups of consecutive_groups")
+#st.write("This is all groups of consecutive_groups")
 def consecutive_groups(iterable, ordering=lambda x: x):
     for k, g in groupby(enumerate(iterable), key=lambda x: x[0] - ordering(x[1])):
         yield map(itemgetter(1), g)
@@ -567,12 +567,12 @@ st.write(type(test))
 for k in range(len(lastday_bottoms_copy)):
     #st.write(lines)
     #st.write(type(lines))
-    st.write(lastday_bottoms_copy[k])
-    st.write(type(lastday_bottoms_copy[k]))
-    date_object = datetime.strptime(lastday_bottoms_copy[k], '%Y-%m-%d').date()
-    lastday_bottoms_copy[k] = date_object
-    st.write(lastday_bottoms_copy[k])
-    st.write(type(lastday_bottoms_copy[k]))
+    #st.write(lastday_bottoms_copy[k])
+    #st.write(type(lastday_bottoms_copy[k]))
+    #date_object = datetime.strptime(lastday_bottoms_copy[k], '%Y-%m-%d').date()
+    #lastday_bottoms_copy[k] = date_object
+    #st.write(lastday_bottoms_copy[k])
+    #st.write(type(lastday_bottoms_copy[k]))
 
     fig.add_shape(type='line',
                 yref="y",
@@ -581,13 +581,13 @@ for k in range(len(lastday_bottoms_copy)):
                 y0=df['PriceUSD'].min()*1.2,
                 x1=lastday_bottoms_copy[k],
                 y1=df['PriceUSD'].max()*1.2,
-                line=dict(color='black', width=2))
-    #fig.add_annotation(
-                #x=firstday_bottoms[k],
-                #y=df['PriceUSD'].max()*1.25,
-                #yref='paper',
-                #showarrow=False,
-                #text=k)
+                line=dict(color='black', width=3))
+    fig.add_annotation(
+                x=lastday_bottoms_copy[k],
+                y=1.06,
+                yref='paper',
+                showarrow=False,
+                text=k)
 
 fig.update_layout(template='plotly_white')
 fig.update_layout(title_text='BTC Price (source: Coinmetrics)', title_x=0.5)
