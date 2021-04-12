@@ -564,14 +564,13 @@ st.write(test)
 st.write(type(test))
 
 
-
-fig.add_trace(go.Scatter(
-	x=[lastday_bottoms_copy[0], lastday_bottoms_copy[0]],
-	y=[0, 10000],
-	mode='lines',
-	#line_color='rgba(0,0,128,1.0)', #Navy
-	name='Bottom'))
-
+for k in range(len(lastday_bottoms_copy)):
+    fig.add_trace(go.Scatter(
+	    x=[lastday_bottoms_copy[k], lastday_bottoms_copy[k]],
+	    y=[0, 60000],
+	    mode='lines',
+	    #line_color='rgba(0,0,128,1.0)', #Navy
+	    name='Bottom %2s' % k))
 
 
 # add lines using absolute references
