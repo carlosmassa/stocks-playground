@@ -527,9 +527,8 @@ def consecutive_groups(iterable, ordering=lambda x: x):
 
 for group in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%d').toordinal()):
     #st.write(list(group))
-    for k in range(len(consecutive_groups)):
-	converted_list.append(group)
-	st.write(group[k])
+    converted_list=group
+    st.write(converted_list)
 	
 
 st.write("group type is:")
