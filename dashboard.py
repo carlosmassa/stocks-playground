@@ -514,64 +514,22 @@ fig.add_trace(go.Scatter(
 # lines to add, specified by x-position
 lines = {'a':"2018-09-24",'b':"2020-09-24"}
 
-st.write("This is lines")
-for k in range(len(lines)):
-    test=lines[k]
-    st.write(test)
-    st.write(type(test))
 
-bottoms = df.loc[df['AllMinPriceEqual']!= 0,'date'].tolist()
-firstday_bottoms = []
-converted_list = []
-
-st.write("This is bottoms")
-st.write(bottoms)
-
-st.write("This is all groups of consecutive_groups")
-def consecutive_groups(iterable, ordering=lambda x: x):
-    for k, g in groupby(enumerate(iterable), key=lambda x: x[0] - ordering(x[1])):
-        yield map(itemgetter(1), g)
-
-for group in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%d').toordinal()):
-    #st.write(list(group))
-    #converted_list=list(group)
-    converted_list.append(list(group))
-    #st.write(converted_list)
-	
-
-#st.write("group type is:")
-#st.write(type(group))
-
-#st.write("This is the converted_list")
-#st.write(converted_list)
-
-
-firstday_bottoms=[item[0] for item in converted_list]
-firstday_bottoms_copy=firstday_bottoms
-
-lastday_bottoms=[item[-1] for item in converted_list]
-lastday_bottoms_copy=lastday_bottoms
-
-st.write("This is firstday_bottoms")
-st.write(firstday_bottoms)
-
-st.write("This is the last date on firstday_bottoms")
-st.write(firstday_bottoms_copy[0])
 
 # add lines using absolute references
-for k in range(len(firstday_bottoms)):
-    st.write(k)
-    st.write(firstday_bottoms[k])
-    st.write(type(firstday_bottoms[k]))
-    date_object = datetime.strptime(firstday_bottoms[k], '%Y-%m-%d').date()
-    firstday_bottoms[k] = date_object
-    st.write(firstday_bottoms[k])
-    st.write(type(firstday_bottoms[k]))
+for k in range(len(lines)):
+    #st.write(k)
+    #st.write(firstday_bottoms[k])
+    #st.write(type(firstday_bottoms[k]))
+    #date_object = datetime.strptime(firstday_bottoms[k], '%Y-%m-%d').date()
+    #firstday_bottoms[k] = date_object
+    #st.write(firstday_bottoms[k])
+    #st.write(type(firstday_bottoms[k]))
 
     fig.add_shape(type='line',
                 yref="y",
                 xref="x",
-                x0=firstday_bottoms[k],
+                x0=lines[k],
                 y0=df['PriceUSD'].min()*1.2,
                 x1=firstday_bottoms[k],
                 y1=df['PriceUSD'].max()*1.2,
