@@ -533,11 +533,11 @@ for group in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%
     #st.write(converted_list)
 	
 
-st.write("group type is:")
-st.write(type(group))
+#st.write("group type is:")
+#st.write(type(group))
 
-st.write("This is the converted_list")
-st.write(converted_list)
+#st.write("This is the converted_list")
+#st.write(converted_list)
 
 firstday_bottoms=[item[0] for item in converted_list]
 
@@ -554,13 +554,13 @@ for k in range(len(firstday_bottoms)):
                 y0=df['PriceUSD'].min()*1.2,
                 x1=firstday_bottoms[k],
                 y1=df['PriceUSD'].max()*1.2,
-                line=dict(color='black', width=3))
-    fig.add_annotation(
-                x=firstday_bottoms[k],
-                y=df['PriceUSD'].max()*1.25,
-                yref='paper',
-                showarrow=False,
-                text=k)
+                line=dict(color='black', width=2))
+    #fig.add_annotation(
+                #x=firstday_bottoms[k],
+                #y=df['PriceUSD'].max()*1.25,
+                #yref='paper',
+                #showarrow=False,
+                #text=k)
 
 fig.update_layout(template='plotly_white')
 fig.update_layout(title_text='BTC Price (source: Coinmetrics)', title_x=0.5)
