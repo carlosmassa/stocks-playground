@@ -431,6 +431,8 @@ df['MinPriceUSD50days'] = df['PriceUSD'].rolling(window=50).min()
 df['MinPriceUSD100days'] = df['PriceUSD'].rolling(window=100).min()
 df['MinPriceUSD200days'] = df['PriceUSD'].rolling(window=200).min()
 df['MinPriceUSD365days'] = df['PriceUSD'].rolling(window=365).min()
+df['MinPriceUSD4years'] = df['PriceUSD'].rolling(window=1460).min()
+df['AllMinPriceEqual'] = np.where((df['MinPriceUSD50days'] = df['MinPriceUSD100days']), 1, 0)
 
 # Calculation of lowest price forward
 # reverse df
@@ -490,12 +492,42 @@ fig.add_trace(go.Scatter(
 
 fig.add_trace(go.Scatter(
 	x=df['date'],
+	y=df['MinPriceUSD4years'],
+	fill=None,
+	fillcolor=None,
+	mode='lines',
+	#line_color='rgba(0,0,128,1.0)', #Navy
+	name='Highest Price for +4 years'))
+
+fig.add_trace(go.Scatter(
+	x=df['date'],
 	y=df['LowestPriceForward'],
 	fill=None,
 	fillcolor=None,
 	mode='lines',
 	#line_color='rgba(0,0,128,1.0)', #Navy
 	name='Lowest Price forward'))
+
+# lines to add, specified by x-position
+lines = {'a':"2018-09-24",'b':"20120-09-24"}
+
+# add lines using absolute references
+for k in lines.keys():
+    #print(k)
+    fig.add_shape(type='line',
+                yref="y",
+                xref="x",
+                x0=lines[k],
+                y0=df['PriceUSD'].min()*1.2,
+                x1=lines[k],
+                y1=df['PriceUSD'].max()*1.2,
+                line=dict(color='black', width=3))
+    fig.add_annotation(
+                x=lines[k],
+                y=1.06,
+                yref='paper',
+                showarrow=False,
+                text=k)
 
 fig.update_layout(template='plotly_white')
 fig.update_layout(title_text='BTC Price (source: Coinmetrics)', title_x=0.5)
