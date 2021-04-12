@@ -516,6 +516,7 @@ lines = {'a':"2018-09-24",'b':"2020-09-24"}
 
 bottoms = df.loc[df['AllMinPriceEqual']!= 0,'date'].tolist()
 firstday_bottoms = []
+converted_list = []
 
 st.write("This is bottoms")
 st.write(bottoms)
