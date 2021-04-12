@@ -518,7 +518,8 @@ lines = {'a':"2018-09-24",'b':"2020-09-24"}
 
 # add lines using absolute references
 for k in range(len(lines)):
-    #st.write(k)
+    st.write(lines)
+    st.write(type(lines)
     #st.write(firstday_bottoms[k])
     #st.write(type(firstday_bottoms[k]))
     #date_object = datetime.strptime(firstday_bottoms[k], '%Y-%m-%d').date()
