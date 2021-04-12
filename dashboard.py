@@ -515,8 +515,10 @@ fig.add_trace(go.Scatter(
 lines = {'a':"2018-09-24",'b':"2020-09-24"}
 
 st.write("This is lines")
-st.write(lines[0])
-st.write(type(lines[0]))
+for k in range(len(lines)):
+    test=lines[k]
+    st.write(test)
+    st.write(type(test))
 
 bottoms = df.loc[df['AllMinPriceEqual']!= 0,'date'].tolist()
 firstday_bottoms = []
@@ -546,6 +548,9 @@ for group in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%
 
 firstday_bottoms=[item[0] for item in converted_list]
 firstday_bottoms_copy=firstday_bottoms
+
+lastday_bottoms=[item[-1] for item in converted_list]
+lastday_bottoms_copy=lastday_bottoms
 
 st.write("This is firstday_bottoms")
 st.write(firstday_bottoms)
