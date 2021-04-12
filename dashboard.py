@@ -527,7 +527,7 @@ def consecutive_groups(iterable, ordering=lambda x: x):
         yield map(itemgetter(1), g)
 
 for group in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%d').toordinal()):
-    st.write(list(group))
+    #st.write(list(group))
     #converted_list=list(group)
     converted_list.append(list(group))
     #st.write(converted_list)
