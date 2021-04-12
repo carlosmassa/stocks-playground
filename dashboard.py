@@ -552,6 +552,7 @@ st.write(firstday_bottoms_copy[0])
 for k in range(len(firstday_bottoms)):
     st.write(k)
     st.write(firstday_bottoms[k])
+    st.write(type(firstday_bottoms[k]))
     fig.add_shape(type='line',
                 yref="y",
                 xref="x",
