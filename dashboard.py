@@ -537,7 +537,9 @@ st.write(type(group))
 
 st.write("This is the converted_list")
 st.write(converted_list)
-	
+
+firstday_bottoms=[item[0] for item in converted_list]
+
 st.write("This is firstday_bottoms")
 st.write(firstday_bottoms)
 
