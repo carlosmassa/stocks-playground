@@ -511,9 +511,6 @@ fig.add_trace(go.Scatter(
 	#line_color='rgba(0,0,128,1.0)', #Navy
 	name='Lowest Price forward'))
 
-# lines to add, specified by x-position
-lines = {'a':"2018-09-24",'b':"2020-09-24"}
-
 bottoms = df.loc[df['AllMinPriceEqual']!= 0,'date'].tolist()
 firstday_bottoms = []
 converted_list = []
@@ -521,23 +518,14 @@ converted_list = []
 st.write("This is bottoms")
 st.write(bottoms)
 
-#st.write("This is all groups of consecutive_groups")
+
 def consecutive_groups(iterable, ordering=lambda x: x):
     for k, g in groupby(enumerate(iterable), key=lambda x: x[0] - ordering(x[1])):
         yield map(itemgetter(1), g)
 
 for group in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%d').toordinal()):
-    #st.write(list(group))
-    #converted_list=list(group)
+
     converted_list.append(list(group))
-    #st.write(converted_list)
-	
-
-#st.write("group type is:")
-#st.write(type(group))
-
-#st.write("This is the converted_list")
-#st.write(converted_list)
 
 
 firstday_bottoms=[item[0] for item in converted_list]
@@ -558,15 +546,10 @@ st.write(lastday_bottoms)
 st.write("This is the last date on lastday_bottoms")
 st.write(lastday_bottoms_copy[0])
 
-st.write("This is the type of df[date]")
-test = df.iloc[0]['date']
-st.write(test)
-st.write(type(test))
-
 
 for k in range(len(firstday_bottoms_copy)):
     fig.add_trace(go.Scatter(
-	    x=[firstday_bottoms_copy[k], firstday_bottoms_copy[k]],
+	    x=[firstday_bottoms[k], firstday_bottoms[k]],
 	    y=[0, 60000],
 	    mode='lines',
 	    line_color='green', 
