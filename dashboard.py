@@ -515,8 +515,8 @@ fig.add_trace(go.Scatter(
 lines = {'a':"2018-09-24",'b':"2020-09-24"}
 
 st.write("This is lines")
-st.write(lines[a])
-st.write(type(lines[a]))
+st.write(lines[0])
+st.write(type(lines[0]))
 
 bottoms = df.loc[df['AllMinPriceEqual']!= 0,'date'].tolist()
 firstday_bottoms = []
