@@ -534,7 +534,6 @@ for group in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%
 st.write("group type is:")
 st.write(type(group))
 
-converted_list = list(group)
 st.write("This is the converted_list")
 st.write(converted_list)
 	
