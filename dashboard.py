@@ -433,7 +433,7 @@ df['MinPriceUSD200days'] = df['PriceUSD'].rolling(window=200).min()
 df['MinPriceUSD365days'] = df['PriceUSD'].rolling(window=365).min()
 df['MinPriceUSD2years'] = df['PriceUSD'].rolling(window=730).min()
 df['MinPriceUSD4years'] = df['PriceUSD'].rolling(window=1460).min()
-df['AllMinPriceEqual'] = np.where((df['MinPriceUSD50days'] == df['MinPriceUSD100days']), 1, 0)
+df['AllMinPriceEqual'] = np.where((df['MinPriceUSD50days'] == df['MinPriceUSD100days']), df['date'], 0)
 
 # Calculation of lowest price forward
 # reverse df
@@ -512,20 +512,22 @@ fig.add_trace(go.Scatter(
 # lines to add, specified by x-position
 lines = {'a':"2018-09-24",'b':"2020-09-24"}
 
+bottoms = df.loc[df['AllMinPriceEqual']!= 0,'date'].tolist()
+
 # add lines using absolute references
-for k in lines.keys():
+for k in bottoms.keys():
     #print(k)
     fig.add_shape(type='line',
                 yref="y",
                 xref="x",
-                x0=lines[k],
+                x0=bottoms[k],
                 y0=df['PriceUSD'].min()*1.2,
-                x1=lines[k],
+                x1=bottoms[k],
                 y1=df['PriceUSD'].max()*1.2,
                 line=dict(color='black', width=3))
     fig.add_annotation(
-                x=lines[k],
-                y=0.95,
+                x=bottoms[k],
+                y=df['PriceUSD'].max()*1.25,
                 yref='paper',
                 showarrow=False,
                 text=k)
