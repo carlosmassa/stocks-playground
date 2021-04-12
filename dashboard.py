@@ -558,6 +558,9 @@ st.write(lastday_bottoms)
 st.write("This is the last date on lastday_bottoms")
 st.write(lastday_bottoms_copy[0])
 
+st.write("This is the type of df[date]")
+st.write(type(df['date'])
+
 # add lines using absolute references
 for k in range(len(lastday_bottoms_copy)):
     #st.write(lines)
