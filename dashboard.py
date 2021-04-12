@@ -523,7 +523,7 @@ def consecutive_groups(iterable, ordering=lambda x: x):
         yield map(itemgetter(1), g)
 
 for g in consecutive_groups(bottoms, lambda x: datetime.strptime(x, '%Y-%m-%d').toordinal()):
-    print(list(bottoms))
+    st.write(list(bottoms))
 
 # add lines using absolute references
 for k in range(len(bottoms)):
